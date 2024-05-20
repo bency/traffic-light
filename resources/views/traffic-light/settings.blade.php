@@ -15,12 +15,16 @@
         <div class="filters mb-4">
             <div class="mb-3">
                 <label for="county" class="form-label">County:</label>
-                <input type="text" id="county" name="county" class="form-control">
+                <select id="county" name="county" class="form-control">
+                    <option value="">Select County</option>
+                </select>
             </div>
 
             <div class="mb-3">
                 <label for="district" class="form-label">District:</label>
-                <input type="text" id="district" name="district" class="form-control">
+                <select id="district" name="district" class="form-control" disabled>
+                    <option value="">Select District</option>
+                </select>
             </div>
 
             <div class="mb-3">

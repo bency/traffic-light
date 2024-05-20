@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TrafficLightSettingController;
 use App\Http\Controllers\Api\TrafficLightSettingApiController;
-
+use App\Models\TrafficLightSetting;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +19,5 @@ use App\Http\Controllers\Api\TrafficLightSettingApiController;
 
 Route::apiResource('traffic-light-settings', TrafficLightSettingController::class);
 Route::get('/traffic-light-settings', [TrafficLightSettingApiController::class, 'index']);
+Route::get('/counties', [TrafficLightSettingApiController::class, 'getCounties']);
+Route::get('/districts', [TrafficLightSettingApiController::class, 'getDistricts']);
