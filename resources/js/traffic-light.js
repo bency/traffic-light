@@ -23,14 +23,21 @@ async function updateSetting(id, data) {
 // 初始化设置
 async function initializeSettings() {
     let trafficLightSettings = await fetchSettings();
-    let currentSettingId = null;
+    let currentSettingId = localStorage.getItem("currentSettingId"); // 从 localStorage 读取当前设置的 ID
 
-    if (Object.keys(trafficLightSettings).length > 0) {
-        currentSettingId = determineCurrentSetting(trafficLightSettings);
-    } else {
-        currentSettingId = await addDefaultCycle();
-        trafficLightSettings = await fetchSettings(); // 重新获取设置
+    // 如果 currentSettingId 不存在或在 settings 中找不到，选择第一个时相
+    if (!currentSettingId || !trafficLightSettings[currentSettingId]) {
+        if (Object.keys(trafficLightSettings).length > 0) {
+            currentSettingId =
+                determineCurrentSetting(trafficLightSettings) ||
+                Object.keys(trafficLightSettings)[0];
+            saveCurrentSettingId(currentSettingId); // 存储当前设置的 ID
+        } else {
+            currentSettingId = await addDefaultCycle();
+            trafficLightSettings = await fetchSettings(); // 重新获取设置
+        }
     }
+
     let remainingSeconds = trafficLightSettings[currentSettingId].red_seconds;
     let lastUpdateTime = Date.now();
     let offset = trafficLightSettings[currentSettingId].offset; // 确保加载时读取偏移量
@@ -60,7 +67,7 @@ async function initializeSettings() {
                 }
             }
         }
-        return Object.keys(settings)[0]; // default to the first setting if no match
+        return null; // 没有找到匹配的时相
     }
 
     function parseTime(timeStr) {
@@ -68,6 +75,10 @@ async function initializeSettings() {
         const date = new Date();
         date.setHours(hours, minutes, 0, 0);
         return date;
+    }
+
+    function saveCurrentSettingId(id) {
+        localStorage.setItem("currentSettingId", id);
     }
 
     function calculateRemainingSeconds() {
@@ -202,6 +213,11 @@ async function initializeSettings() {
 
             option.innerText = displayText;
 
+            // 高亮当前选中的时相
+            if (parseInt(id) === parseInt(currentSettingId)) {
+                option.classList.add("active");
+            }
+
             const deleteButton = document.createElement("button");
             deleteButton.className = "delete-button";
             deleteButton.innerText = "刪除";
@@ -234,6 +250,7 @@ async function initializeSettings() {
     async function changeTrafficLightSettings(id) {
         if (trafficLightSettings[id]) {
             currentSettingId = id;
+            saveCurrentSettingId(id); // 存储当前设置的 ID
             offset = trafficLightSettings[currentSettingId].offset;
             calculateRemainingSeconds();
             lastUpdateTime = Date.now();
@@ -241,6 +258,7 @@ async function initializeSettings() {
             updateCountdown();
             updateOffsetDisplay();
             updateCurrentSettings();
+            updateSettingsOptions(); // 更新设置选项以高亮当前选中的时相
         } else {
             console.error(`Setting ID ${id} is invalid.`);
         }

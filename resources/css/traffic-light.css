@@ -145,6 +145,19 @@
     justify-content: space-between;
     align-items: center;
 }
+.setting-option.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.setting-option .delete-button {
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
 
 .setting-option .delete-button {
     background-color: red;
