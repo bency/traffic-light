@@ -76,6 +76,12 @@ class TrafficLightManager {
             .addEventListener("change", () => this.saveTimeChanges());
     }
 
+    attachHeadingChangeListener() {
+        document
+            .getElementById("heading")
+            .addEventListener("change", () => this.saveHeadingChanges());
+    }
+
     async saveTimeChanges() {
         const startTime = document.getElementById("start-time").value || null;
         const endTime = document.getElementById("end-time").value || null;
@@ -88,8 +94,22 @@ class TrafficLightManager {
             return;
         }
 
-        this.trafficLightSettings[this.currentSettingId].start_time = startTime;
-        this.trafficLightSettings[this.currentSettingId].end_time = endTime;
+        this.trafficLightSettings[this.currentSettingId].start_time = startTime
+            ? startTime.slice(0, 5)
+            : null;
+        this.trafficLightSettings[this.currentSettingId].end_time = endTime
+            ? endTime.slice(0, 5)
+            : null;
+
+        await this.updateSetting(
+            this.currentSettingId,
+            this.trafficLightSettings[this.currentSettingId]
+        );
+    }
+
+    async saveHeadingChanges() {
+        const heading = document.getElementById("heading").value || null;
+        this.trafficLightSettings[this.currentSettingId].heading = heading;
 
         await this.updateSetting(
             this.currentSettingId,
@@ -99,8 +119,17 @@ class TrafficLightManager {
 
     setInputTimes() {
         const setting = this.trafficLightSettings[this.currentSettingId];
-        document.getElementById("start-time").value = setting.start_time || "";
-        document.getElementById("end-time").value = setting.end_time || "";
+        document.getElementById("start-time").value = setting.start_time
+            ? setting.start_time.slice(0, 5)
+            : "";
+        document.getElementById("end-time").value = setting.end_time
+            ? setting.end_time.slice(0, 5)
+            : "";
+    }
+
+    setHeading() {
+        const setting = this.trafficLightSettings[this.currentSettingId];
+        document.getElementById("heading").value = setting.heading || "";
     }
 
     calculateRemainingSeconds() {
@@ -275,9 +304,12 @@ class TrafficLightManager {
             this.saveCurrentSettingId(id);
 
             const setting = this.trafficLightSettings[this.currentSettingId];
-            document.getElementById("start-time").value =
-                setting.start_time || "";
-            document.getElementById("end-time").value = setting.end_time || "";
+            document.getElementById("start-time").value = setting.start_time
+                ? setting.start_time.slice(0, 5)
+                : "";
+            document.getElementById("end-time").value = setting.end_time
+                ? setting.end_time.slice(0, 5)
+                : "";
 
             this.offset =
                 this.trafficLightSettings[this.currentSettingId].offset;
@@ -415,8 +447,12 @@ class TrafficLightManager {
                 const name = document
                     .getElementById("new-cycle-name")
                     .value.trim();
-                const startTime = document.getElementById("start-time").value;
-                const endTime = document.getElementById("end-time").value;
+                document.getElementById("start-time").value = setting.start_time
+                    ? setting.start_time.slice(0, 5)
+                    : "";
+                document.getElementById("end-time").value = setting.end_time
+                    ? setting.end_time.slice(0, 5)
+                    : "";
                 if (name === "") {
                     alert("請輸入週期名稱");
                     return;
@@ -596,7 +632,9 @@ class TrafficLightManager {
         }
 
         this.attachTimeChangeListeners();
+        this.attachHeadingChangeListener();
         this.setInputTimes();
+        this.setHeading();
         this.calculateRemainingSeconds();
         this.updateTrafficLight();
         this.updateCountdown();

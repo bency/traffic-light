@@ -97,6 +97,19 @@
                         開始時間: <input type="time" id="start-time"><br>
                         結束時間: <input type="time" id="end-time">
                     </div>
+                    <div class="heading-selection">
+                        方向:
+                        <select id="heading">
+                            <option value="N">往北</option>
+                            <option value="NE">往東北</option>
+                            <option value="E">往東</option>
+                            <option value="SE">往東南</option>
+                            <option value="S">往南</option>
+                            <option value="SW">往西南</option>
+                            <option value="W">往西</option>
+                            <option value="NW">往西北</option>
+                        </select>
+                    </div>
                 </div>
             </div>
             <div class="control-container">

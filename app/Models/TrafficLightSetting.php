@@ -19,5 +19,6 @@ class TrafficLightSetting extends Model
         'offset',
         'start_time',
         'end_time',
+        'heading',
     ];
 }

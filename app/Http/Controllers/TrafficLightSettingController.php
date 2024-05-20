@@ -24,8 +24,9 @@ class TrafficLightSettingController extends Controller
             'straight_green_seconds' => 'integer',
             'right_green_seconds' => 'integer',
             'offset' => 'integer',
-            'start_time' => 'nullable|date_format:H:i|required_with:end_time', // 允许为空
-            'end_time' => 'nullable|date_format:H:i|required_with:start_time', // 允许为空
+            'start_time' => 'nullable|date_format:H:i:s|required_with:end_time', // 允许为空
+            'end_time' => 'nullable|date_format:H:i:s|required_with:start_time', // 允许为空
+            'heading' => 'nullable|string',
         ]);
 
         $setting = TrafficLightSetting::create($request->all());
@@ -48,18 +49,23 @@ class TrafficLightSettingController extends Controller
     // 更新设置
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'string',
-            'red_seconds' => 'integer',
-            'yellow_seconds' => 'integer',
-            'green_seconds' => 'integer',
-            'left_green_seconds' => 'integer',
-            'straight_green_seconds' => 'integer',
-            'right_green_seconds' => 'integer',
-            'offset' => 'integer',
-            'start_time' => 'nullable|date_format:H:i|required_with:end_time', // 允许为空
-            'end_time' => 'nullable|date_format:H:i|required_with:start_time', // 允许为空
-        ]);
+        try {
+            $request->validate([
+                'name' => 'string',
+                'red_seconds' => 'integer',
+                'yellow_seconds' => 'integer',
+                'green_seconds' => 'integer',
+                'left_green_seconds' => 'integer',
+                'straight_green_seconds' => 'integer',
+                'right_green_seconds' => 'integer',
+                'offset' => 'integer',
+                'start_time' => 'nullable|date_format:H:i:s|required_with:end_time', // 允许为空
+                'end_time' => 'nullable|date_format:H:i:s|required_with:start_time', // 允许为空
+                'heading' => 'nullable|string',
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json(['errors' => $e->errors()], 422);
+        }
 
         $setting = TrafficLightSetting::find($id);
 
