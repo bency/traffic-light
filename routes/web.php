@@ -22,3 +22,5 @@ Route::get('/upload', function () {
     return view('upload');
 });
 Route::post('/upload', [TrafficLightLocationController::class, 'upload'])->name('traffic-light-locations.upload');
+
+Route::view('/traffic-light-settings-page', 'traffic-light.settings');

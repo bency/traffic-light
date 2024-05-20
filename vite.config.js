@@ -7,6 +7,8 @@ export default defineConfig({
             input: [
                 "resources/css/traffic-light.css",
                 "resources/js/traffic-light.js",
+                "resources/css/app.css",
+                "resources/js/traffic-light-settings.js",
             ],
             refresh: true,
         }),
