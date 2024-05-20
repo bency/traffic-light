@@ -93,6 +93,10 @@
                             <button class="increase-time-5">+5</button>
                         </div>
                     </div>
+                    <div class="time-range">
+                        開始時間: <input type="time" id="start-time"><br>
+                        結束時間: <input type="time" id="end-time">
+                    </div>
                 </div>
             </div>
             <div class="control-container">

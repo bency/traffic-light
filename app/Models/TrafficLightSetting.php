@@ -16,6 +16,8 @@ class TrafficLightSetting extends Model
         'left_green_seconds',
         'straight_green_seconds',
         'right_green_seconds',
-        'offset'
+        'offset',
+        'start_time',
+        'end_time',
     ];
 }

@@ -26,7 +26,7 @@ async function initializeSettings() {
     let currentSettingId = null;
 
     if (Object.keys(trafficLightSettings).length > 0) {
-        currentSettingId = Object.keys(trafficLightSettings)[0];
+        currentSettingId = determineCurrentSetting(trafficLightSettings);
     } else {
         currentSettingId = await addDefaultCycle();
         trafficLightSettings = await fetchSettings(); // 重新获取设置
@@ -47,6 +47,28 @@ async function initializeSettings() {
     // 是否顯示左轉綠燈和右轉綠燈的標誌
     let showLeftGreenWithRed = true;
     let showRightGreenWithRed = true;
+
+    function determineCurrentSetting(settings) {
+        const now = new Date();
+        for (let id in settings) {
+            const setting = settings[id];
+            if (setting.start_time && setting.end_time) {
+                const startTime = parseTime(setting.start_time);
+                const endTime = parseTime(setting.end_time);
+                if (now >= startTime && now <= endTime) {
+                    return id;
+                }
+            }
+        }
+        return Object.keys(settings)[0]; // default to the first setting if no match
+    }
+
+    function parseTime(timeStr) {
+        const [hours, minutes] = timeStr.split(":").map(Number);
+        const date = new Date();
+        date.setHours(hours, minutes, 0, 0);
+        return date;
+    }
 
     function calculateRemainingSeconds() {
         const now = new Date();
@@ -169,13 +191,16 @@ async function initializeSettings() {
             const option = document.createElement("div");
             option.className = "setting-option";
             option.dataset.id = id;
-            option.dataset.red = setting.red_seconds;
-            option.dataset.yellow = setting.yellow_seconds;
-            option.dataset.green = setting.green_seconds;
-            option.dataset.leftGreen = setting.left_green_seconds;
-            option.dataset.straightGreen = setting.straight_green_seconds;
-            option.dataset.rightGreen = setting.right_green_seconds;
-            option.innerText = `${setting.name}: 紅燈: ${setting.red_seconds}秒, 黃燈: ${setting.yellow_seconds}秒, 綠燈: ${setting.green_seconds}秒, 左轉綠燈: ${setting.left_green_seconds}秒, 直行綠燈: ${setting.straight_green_seconds}秒, 右轉綠燈: ${setting.right_green_seconds}秒`;
+
+            // 构建显示文本，包含名称和起始时间或“墊檔”
+            let displayText = `${setting.name}`;
+            if (setting.start_time) {
+                displayText += ` (開始時間: ${setting.start_time})`;
+            } else {
+                displayText += ` (墊檔)`;
+            }
+
+            option.innerText = displayText;
 
             const deleteButton = document.createElement("button");
             deleteButton.className = "delete-button";
@@ -338,6 +363,8 @@ async function initializeSettings() {
 
     document.getElementById("add-cycle").addEventListener("click", async () => {
         const name = document.getElementById("new-cycle-name").value.trim();
+        const startTime = document.getElementById("start-time").value;
+        const endTime = document.getElementById("end-time").value;
         if (name === "") {
             alert("請輸入週期名稱");
             return;
@@ -352,6 +379,8 @@ async function initializeSettings() {
             straight_green_seconds: 0,
             right_green_seconds: 0,
             offset: 0,
+            start_time: startTime || null,
+            end_time: endTime || null,
         };
 
         const response = await fetch("/api/traffic-light-settings", {
@@ -367,6 +396,8 @@ async function initializeSettings() {
 
         trafficLightSettings[newId] = createdCycle;
         document.getElementById("new-cycle-name").value = "";
+        document.getElementById("start-time").value = "";
+        document.getElementById("end-time").value = "";
         updateSettingsOptions();
     });
 
@@ -476,6 +507,16 @@ async function initializeSettings() {
     updateOffsetDisplay();
     updateCurrentSettings();
     requestAnimationFrame(countdown);
+    function startIntervalCheck() {
+        setInterval(() => {
+            const newSettingId = determineCurrentSetting(trafficLightSettings);
+            if (newSettingId !== currentSettingId) {
+                changeTrafficLightSettings(newSettingId);
+            }
+        }, 60000); // 每分钟检查一次
+    }
+
+    startIntervalCheck();
 }
 
 // 调用初始化函数
