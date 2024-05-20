@@ -246,7 +246,7 @@ async function initializeSettings() {
             // 构建显示文本，包含名称和起始时间或“墊檔”
             let displayText = `${setting.name}`;
             if (setting.start_time) {
-                displayText += ` (開始時間: ${setting.start_time})`;
+                displayText += ` (${setting.start_time})`;
             } else {
                 displayText += ` (墊檔)`;
             }
