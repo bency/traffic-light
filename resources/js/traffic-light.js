@@ -161,26 +161,26 @@ class TrafficLightManager {
         document.getElementById(`${this.currentLight}-light`).style.display =
             "inline-block";
 
-        if (this.currentLight === "red") {
-            if (
-                this.showLeftGreenWithRed &&
-                this.trafficLightSettings[this.currentSettingId]
-                    .left_green_seconds > 0
-            ) {
-                document.getElementById("left-green-light").style.display =
-                    "inline-block";
-                document.getElementById("left-green-light").style.opacity = 1;
-            }
-            if (
-                this.showRightGreenWithRed &&
-                this.trafficLightSettings[this.currentSettingId]
-                    .right_green_seconds > 0
-            ) {
-                document.getElementById("right-green-light").style.display =
-                    "inline-block";
-                document.getElementById("right-green-light").style.opacity = 1;
-            }
-        }
+        // if (this.currentLight === "red") {
+        //     if (
+        //         this.showLeftGreenWithRed &&
+        //         this.trafficLightSettings[this.currentSettingId]
+        //             .left_green_seconds > 0
+        //     ) {
+        //         document.getElementById("left-green-light").style.display =
+        //             "inline-block";
+        //         document.getElementById("left-green-light").style.opacity = 1;
+        //     }
+        //     if (
+        //         this.showRightGreenWithRed &&
+        //         this.trafficLightSettings[this.currentSettingId]
+        //             .right_green_seconds > 0
+        //     ) {
+        //         document.getElementById("right-green-light").style.display =
+        //             "inline-block";
+        //         document.getElementById("right-green-light").style.opacity = 1;
+        //     }
+        // }
     }
 
     updateCountdown() {
@@ -303,6 +303,7 @@ class TrafficLightManager {
             this.updateOffsetDisplay();
             this.updateCurrentSettings();
             this.updateSettingsOptions();
+            this.setHeading();
         } else {
             console.error(`Setting ID ${id} is invalid.`);
         }
@@ -489,19 +490,19 @@ class TrafficLightManager {
                 this.updateSettingsOptions();
             });
 
-        document
-            .getElementById("show-left-arrow")
-            .addEventListener("change", (e) => {
-                this.showLeftGreenWithRed = e.target.checked;
-                this.updateTrafficLight();
-            });
+        // document
+        //     .getElementById("show-left-arrow")
+        //     .addEventListener("change", (e) => {
+        //         this.showLeftGreenWithRed = e.target.checked;
+        //         this.updateTrafficLight();
+        //     });
 
-        document
-            .getElementById("show-right-arrow")
-            .addEventListener("change", (e) => {
-                this.showRightGreenWithRed = e.target.checked;
-                this.updateTrafficLight();
-            });
+        // document
+        //     .getElementById("show-right-arrow")
+        //     .addEventListener("change", (e) => {
+        //         this.showRightGreenWithRed = e.target.checked;
+        //         this.updateTrafficLight();
+        //     });
 
         const draggables = document.querySelectorAll(".draggable");
         const container = document.getElementById("time-adjust");

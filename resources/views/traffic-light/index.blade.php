@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Traffic Light Countdown</title>
     @vite(['resources/css/traffic-light.css', 'resources/js/traffic-light.js'])
+    <link rel="stylesheet" href="{{ mix('node_modules/@fortawesome/fontawesome-free/css/all.min.css') }}">
 </head>
 
 <body>
@@ -21,10 +22,10 @@
                         <span class="left-arrow">←</span>
                     </div>
                     <div class="light straight-green" id="straight-green-light">
-                        <span class="straight-arrow">↑</span>
+                        <i class="fas fa-arrow-left"></i>
                     </div>
                     <div class="light right-green" id="right-green-light">
-                        <span class="right-arrow">→</span>
+                        <i class="fas fa-arrow-right"></i>
                     </div>
                 </div>
                 <div id="countdown"></div>
@@ -115,14 +116,6 @@
                         </select>
                     </div>
                 </div>
-            </div>
-            <div class="control-container">
-                <label for="show-left-arrow">
-                    <input type="checkbox" id="show-left-arrow" checked> 左轉箭頭
-                </label>
-                <label for="show-right-arrow">
-                    <input type="checkbox" id="show-right-arrow" checked> 右轉箭頭
-                </label>
             </div>
         </div>
         <div class="bottom">

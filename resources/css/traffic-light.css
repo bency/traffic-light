@@ -47,15 +47,18 @@
 }
 
 #left-green-light {
-    background-color: green;
+    background-color: #f0f0f0;
+    position: relative;
 }
 
 #straight-green-light {
-    background-color: green;
+    background-color: #f0f0f0;
+    position: relative;
 }
 
 #right-green-light {
-    background-color: green;
+    background-color: #f0f0f0;
+    position: relative;
 }
 
 .light span {
@@ -200,4 +203,34 @@
 #add-cycle:focus {
     outline: none;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.right-green i {
+    font-size: 24px;
+    color: green;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    font-size: 48px;
+}
+
+.left-green i {
+    font-size: 24px;
+    color: green;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    font-size: 48px;
+}
+
+.straight-green i {
+    font-size: 24px;
+    color: green;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    font-size: 48px;
 }
