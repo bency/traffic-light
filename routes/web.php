@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TrafficLightSettingController;
+use App\Http\Controllers\TrafficLightLocationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,3 +16,9 @@ use App\Http\Controllers\TrafficLightSettingController;
 */
 
 Route::get('/', [TrafficLightSettingController::class, 'showView']);
+
+// 上傳 csv
+Route::get('/upload', function () {
+    return view('upload');
+});
+Route::post('/upload', [TrafficLightLocationController::class, 'upload'])->name('traffic-light-locations.upload');

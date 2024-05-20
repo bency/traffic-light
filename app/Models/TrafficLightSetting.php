@@ -21,4 +21,9 @@ class TrafficLightSetting extends Model
         'end_time',
         'heading',
     ];
+
+    public function trafficLightLocation()
+    {
+        return $this->belongsTo(TrafficLightLocation::class);
+    }
 }
