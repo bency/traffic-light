@@ -1,111 +1,147 @@
-body {
-    font-family: Arial, sans-serif;
-}
+/* 添加适当的 CSS 样式 */
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
 }
-.top {
-    width: 100%;
+
+.top, .bottom {
+    width: 80%;
+    margin: 10px;
+}
+
+.traffic-light-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    margin-bottom: 20px;
 }
-.bottom {
-    width: 100%;
-    border-top: 1px solid #ccc;
-    padding: 20px;
-}
-#traffic-light-container {
+
+#traffic-light {
     display: flex;
-    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
 }
-#countdown {
-    font-size: 2em;
-    margin: 20px;
-}
+
 .light {
     width: 50px;
     height: 50px;
+    margin: 5px;
     border-radius: 50%;
-    margin: 10px;
-    display: inline-block;
-    position: relative;
+    background-color: grey;
 }
-.red {
+
+#red-light {
     background-color: red;
 }
-.green {
-    background-color: green;
-}
-.yellow {
+
+#yellow-light {
     background-color: yellow;
 }
-.left-green {
-    background-color: lightgreen;
+
+#green-light {
+    background-color: green;
 }
-.straight-green {
-    background-color: limegreen;
+
+#left-green-light {
+    background-color: green;
 }
-.right-green {
-    background-color: darkgreen;
+
+#straight-green-light {
+    background-color: green;
 }
-.left-arrow, .straight-arrow, .right-arrow {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 24px;
+
+#right-green-light {
+    background-color: green;
+}
+
+.light span {
+    font-size: 20px;
     color: white;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
 }
-.button-container, .time-adjust-container {
-    margin: 20px;
+
+#countdown {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
-.settings {
+
+.button-container, .time-adjust-container, .control-container {
     display: flex;
-    justify-content: space-between;
-}
-.traffic-settings {
-    width: 300px;
-    padding: 10px;
-}
-.setting-option {
-    margin: 10px 0;
-    cursor: pointer;
-}
-.adjust-buttons {
-    display: flex;
-    justify-content: space-between;
-    width: 100px;
-}
-.draggable {
-    cursor: move;
-    margin: 10px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    background-color: #f9f9f9;
-}
-#current-setting-name {
-    font-size: 1.5em;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 10px;
 }
-.hidden {
-    display: none;
+
+.button-container button, .adjust-buttons button {
+    margin: 5px;
 }
-.delete-button {
+
+#time-adjust {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+}
+
+.draggable {
+    padding: 10px;
+    margin: 5px;
+    background-color: #ddd;
+    border: 1px solid #ccc;
+    cursor: move;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.draggable.dragging {
+    opacity: 0.5;
+}
+
+.adjust-buttons {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.adjust-buttons button {
+    flex: 1;
+    font-size: 1.2em;
+    padding: 10px;
+    margin: 2px;
+}
+
+#settings-options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.setting-option {
+    padding: 10px;
+    margin: 5px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.setting-option .delete-button {
     background-color: red;
     color: white;
     border: none;
-    padding: 5px 10px;
     cursor: pointer;
-    margin-left: 10px;
-}
-.control-container {
-    display: flex;
-    align-items: center;
-}
-.control-container label {
-    margin-right: 10px;
+    padding: 5px;
 }
