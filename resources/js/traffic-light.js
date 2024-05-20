@@ -67,21 +67,6 @@ class TrafficLightManager {
         return date;
     }
 
-    attachTimeChangeListeners() {
-        document
-            .getElementById("start-time")
-            .addEventListener("change", () => this.saveTimeChanges());
-        document
-            .getElementById("end-time")
-            .addEventListener("change", () => this.saveTimeChanges());
-    }
-
-    attachHeadingChangeListener() {
-        document
-            .getElementById("heading")
-            .addEventListener("change", () => this.saveHeadingChanges());
-    }
-
     async saveTimeChanges() {
         const startTime = document.getElementById("start-time").value || null;
         const endTime = document.getElementById("end-time").value || null;
@@ -205,9 +190,7 @@ class TrafficLightManager {
     }
 
     updateOffsetDisplay() {
-        document.getElementById(
-            "offset-display"
-        ).innerText = `偏移量: ${this.offset} 秒`;
+        document.getElementById("offset-display").innerText = `${this.offset}`;
         document.getElementById("current-offset").innerText = this.offset;
     }
 
@@ -391,6 +374,15 @@ class TrafficLightManager {
     }
 
     attachEventListeners() {
+        document
+            .getElementById("start-time")
+            .addEventListener("change", () => this.saveTimeChanges());
+        document
+            .getElementById("end-time")
+            .addEventListener("change", () => this.saveTimeChanges());
+        document
+            .getElementById("heading")
+            .addEventListener("change", () => this.saveHeadingChanges());
         document
             .getElementById("increase-offset")
             .addEventListener("click", () => this.adjustOffset(1));
@@ -631,8 +623,6 @@ class TrafficLightManager {
             }
         }
 
-        this.attachTimeChangeListeners();
-        this.attachHeadingChangeListener();
         this.setInputTimes();
         this.setHeading();
         this.calculateRemainingSeconds();

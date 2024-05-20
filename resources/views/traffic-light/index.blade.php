@@ -30,16 +30,20 @@
                 <div id="countdown"></div>
             </div>
             <div class="button-container">
-                <button id="decrease-offset-5">減少5秒</button>
-                <button id="decrease-offset">減少1秒</button>
-                <button id="increase-offset">增加1秒</button>
-                <button id="increase-offset-5">增加5秒</button>
             </div>
-            <div id="offset-display">偏移量: 0 秒</div>
             <div class="time-adjust-container">
                 <h3>調整燈號時間</h3>
                 <div id="time-adjust">
-                    <div class="draggable" id="adjust-red" draggable="true">
+                    <div class="draggable" id="adjust-red">
+                        偏移: <span id="offset-display">0</span> 秒
+                        <div class="adjust-buttons">
+                            <button id="decrease-offset-5">-5</button>
+                            <button id="decrease-offset">-1</button>
+                            <button id="increase-offset">+1</button>
+                            <button id="increase-offset-5">+5</button>
+                        </div>
+                    </div>
+                    <div class="draggable" id="adjust-red">
                         紅燈: <span id="red-time">30</span> 秒
                         <div class="adjust-buttons">
                             <button class="decrease-time-5">-5</button>
@@ -48,7 +52,7 @@
                             <button class="increase-time-5">+5</button>
                         </div>
                     </div>
-                    <div class="draggable" id="adjust-green" draggable="true">
+                    <div class="draggable" id="adjust-green">
                         綠燈: <span id="green-time">25</span> 秒
                         <div class="adjust-buttons">
                             <button class="decrease-time-5">-5</button>
@@ -57,35 +61,35 @@
                             <button class="increase-time-5">+5</button>
                         </div>
                     </div>
-                    <div class="draggable" id="adjust-yellow" draggable="true">
+                    <div class="draggable" id="adjust-left-green">
+                        左轉: <span id="left-green-time">0</span> 秒
+                        <div class="adjust-buttons">
+                            <button class="decrease-time-5">-5</button>
+                            <button class="decrease-time">-1</button>
+                            <button class="increase-time">+1</button>
+                            <button class="increase-time-5">+5</button>
+                        </div>
+                    </div>
+                    <div class="draggable" id="adjust-straight-green">
+                        直行: <span id="straight-green-time">0</span> 秒
+                        <div class="adjust-buttons">
+                            <button class="decrease-time-5">-5</button>
+                            <button class="decrease-time">-1</button>
+                            <button class="increase-time">+1</button>
+                            <button class="increase-time-5">+5</button>
+                        </div>
+                    </div>
+                    <div class="draggable" id="adjust-right-green">
+                        右轉: <span id="right-green-time">0</span> 秒
+                        <div class="adjust-buttons">
+                            <button class="decrease-time-5">-5</button>
+                            <button class="decrease-time">-1</button>
+                            <button class="increase-time">+1</button>
+                            <button class="increase-time-5">+5</button>
+                        </div>
+                    </div>
+                    <div class="draggable" id="adjust-yellow">
                         黃燈: <span id="yellow-time">5</span> 秒
-                        <div class="adjust-buttons">
-                            <button class="decrease-time-5">-5</button>
-                            <button class="decrease-time">-1</button>
-                            <button class="increase-time">+1</button>
-                            <button class="increase-time-5">+5</button>
-                        </div>
-                    </div>
-                    <div class="draggable" id="adjust-left-green" draggable="true">
-                        左轉綠燈: <span id="left-green-time">0</span> 秒
-                        <div class="adjust-buttons">
-                            <button class="decrease-time-5">-5</button>
-                            <button class="decrease-time">-1</button>
-                            <button class="increase-time">+1</button>
-                            <button class="increase-time-5">+5</button>
-                        </div>
-                    </div>
-                    <div class="draggable" id="adjust-straight-green" draggable="true">
-                        直行綠燈: <span id="straight-green-time">0</span> 秒
-                        <div class="adjust-buttons">
-                            <button class="decrease-time-5">-5</button>
-                            <button class="decrease-time">-1</button>
-                            <button class="increase-time">+1</button>
-                            <button class="increase-time-5">+5</button>
-                        </div>
-                    </div>
-                    <div class="draggable" id="adjust-right-green" draggable="true">
-                        右轉綠燈: <span id="right-green-time">0</span> 秒
                         <div class="adjust-buttons">
                             <button class="decrease-time-5">-5</button>
                             <button class="decrease-time">-1</button>
