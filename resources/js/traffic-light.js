@@ -11,6 +11,8 @@ async function fetchSettings() {
 
 // 更新设置到数据库
 async function updateSetting(id, data) {
+    if (data.start_time === null) delete data.start_time;
+    if (data.end_time === null) delete data.end_time;
     await fetch(`/api/traffic-light-settings/${id}`, {
         method: "PUT",
         headers: {
@@ -80,6 +82,44 @@ async function initializeSettings() {
     function saveCurrentSettingId(id) {
         localStorage.setItem("currentSettingId", id);
     }
+
+    function attachTimeChangeListeners() {
+        document
+            .getElementById("start-time")
+            .addEventListener("change", () => saveTimeChanges());
+        document
+            .getElementById("end-time")
+            .addEventListener("change", () => saveTimeChanges());
+    }
+
+    async function saveTimeChanges() {
+        const startTime = document.getElementById("start-time").value || null;
+        const endTime = document.getElementById("end-time").value || null;
+
+        if (
+            (startTime === null && endTime !== null) ||
+            (startTime !== null && endTime === null)
+        ) {
+            alert("請同時設定起始和結束時間，或者都不填");
+            return;
+        }
+
+        trafficLightSettings[currentSettingId].start_time = startTime;
+        trafficLightSettings[currentSettingId].end_time = endTime;
+
+        await updateSetting(
+            currentSettingId,
+            trafficLightSettings[currentSettingId]
+        );
+    }
+    function setInputTimes() {
+        const setting = trafficLightSettings[currentSettingId];
+        document.getElementById("start-time").value = setting.start_time || "";
+        document.getElementById("end-time").value = setting.end_time || "";
+    }
+
+    attachTimeChangeListeners();
+    setInputTimes();
 
     function calculateRemainingSeconds() {
         const now = new Date();
@@ -251,6 +291,12 @@ async function initializeSettings() {
         if (trafficLightSettings[id]) {
             currentSettingId = id;
             saveCurrentSettingId(id); // 存储当前设置的 ID
+
+            const setting = trafficLightSettings[currentSettingId];
+            document.getElementById("start-time").value =
+                setting.start_time || "";
+            document.getElementById("end-time").value = setting.end_time || "";
+
             offset = trafficLightSettings[currentSettingId].offset;
             calculateRemainingSeconds();
             lastUpdateTime = Date.now();
@@ -385,6 +431,14 @@ async function initializeSettings() {
         const endTime = document.getElementById("end-time").value;
         if (name === "") {
             alert("請輸入週期名稱");
+            return;
+        }
+
+        if (
+            (startTime === "" && endTime !== "") ||
+            (startTime !== "" && endTime === "")
+        ) {
+            alert("請同時設定起始和結束時間，或者都不填");
             return;
         }
 

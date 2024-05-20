@@ -24,8 +24,8 @@ class TrafficLightSettingController extends Controller
             'straight_green_seconds' => 'integer',
             'right_green_seconds' => 'integer',
             'offset' => 'integer',
-            'start_time' => 'nullable|date_format:H:i',
-            'end_time' => 'nullable|date_format:H:i',
+            'start_time' => 'nullable|date_format:H:i|required_with:end_time', // 允许为空
+            'end_time' => 'nullable|date_format:H:i|required_with:start_time', // 允许为空
         ]);
 
         $setting = TrafficLightSetting::create($request->all());
@@ -57,8 +57,8 @@ class TrafficLightSettingController extends Controller
             'straight_green_seconds' => 'integer',
             'right_green_seconds' => 'integer',
             'offset' => 'integer',
-            'start_time' => 'nullable|date_format:H:i',
-            'end_time' => 'nullable|date_format:H:i',
+            'start_time' => 'nullable|date_format:H:i|required_with:end_time', // 允许为空
+            'end_time' => 'nullable|date_format:H:i|required_with:start_time', // 允许为空
         ]);
 
         $setting = TrafficLightSetting::find($id);
