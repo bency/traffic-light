@@ -2,7 +2,11 @@
 async function fetchSettings() {
     const response = await fetch("/api/traffic-light-settings");
     const data = await response.json();
-    return data;
+    const settings = {};
+    data.forEach((setting) => {
+        settings[setting.id] = setting;
+    });
+    return settings;
 }
 
 // 更新设置到数据库
@@ -19,7 +23,14 @@ async function updateSetting(id, data) {
 // 初始化设置
 async function initializeSettings() {
     let trafficLightSettings = await fetchSettings();
-    let currentSettingId = Object.keys(trafficLightSettings)[0];
+    let currentSettingId = null;
+
+    if (Object.keys(trafficLightSettings).length > 0) {
+        currentSettingId = Object.keys(trafficLightSettings)[0];
+    } else {
+        currentSettingId = await addDefaultCycle();
+        trafficLightSettings = await fetchSettings(); // 重新获取设置
+    }
     let remainingSeconds = trafficLightSettings[currentSettingId].red_seconds;
     let lastUpdateTime = Date.now();
     let offset = trafficLightSettings[currentSettingId].offset; // 确保加载时读取偏移量
@@ -196,14 +207,18 @@ async function initializeSettings() {
     }
 
     async function changeTrafficLightSettings(id) {
-        currentSettingId = id;
-        offset = trafficLightSettings[currentSettingId].offset;
-        calculateRemainingSeconds();
-        lastUpdateTime = Date.now();
-        updateTrafficLight();
-        updateCountdown();
-        updateOffsetDisplay();
-        updateCurrentSettings();
+        if (trafficLightSettings[id]) {
+            currentSettingId = id;
+            offset = trafficLightSettings[currentSettingId].offset;
+            calculateRemainingSeconds();
+            lastUpdateTime = Date.now();
+            updateTrafficLight();
+            updateCountdown();
+            updateOffsetDisplay();
+            updateCurrentSettings();
+        } else {
+            console.error(`Setting ID ${id} is invalid.`);
+        }
     }
 
     async function adjustTime(light, amount) {
@@ -233,7 +248,7 @@ async function initializeSettings() {
         if (remainingKeys.length > 0) {
             currentSettingId = remainingKeys[0];
         } else {
-            await addDefaultCycle();
+            currentSettingId = await addDefaultCycle();
         }
         calculateRemainingSeconds();
         updateTrafficLight();
@@ -243,9 +258,8 @@ async function initializeSettings() {
     }
 
     async function addDefaultCycle() {
-        const newId = new Date().getTime(); // 用时间戳生成唯一ID
         const defaultCycle = {
-            name: "默认週期",
+            name: "預設週期",
             red_seconds: 30,
             yellow_seconds: 3,
             green_seconds: 30,
@@ -254,10 +268,22 @@ async function initializeSettings() {
             right_green_seconds: 0,
             offset: 0,
         };
-        trafficLightSettings[newId] = defaultCycle;
-        await updateSetting(newId, defaultCycle);
+
+        const response = await fetch("/api/traffic-light-settings", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(defaultCycle),
+        });
+
+        const newCycle = await response.json();
+        const newId = newCycle.id; // 获取后端生成的 ID
+
+        trafficLightSettings[newId] = newCycle;
         currentSettingId = newId;
         updateSettingsOptions();
+        return newId;
     }
 
     document
@@ -316,7 +342,7 @@ async function initializeSettings() {
             alert("請輸入週期名稱");
             return;
         }
-        const newId = new Date().getTime(); // 用时间戳生成唯一ID
+
         const newCycle = {
             name: name,
             red_seconds: 30,
@@ -327,8 +353,19 @@ async function initializeSettings() {
             right_green_seconds: 0,
             offset: 0,
         };
-        trafficLightSettings[newId] = newCycle;
-        await updateSetting(newId, newCycle);
+
+        const response = await fetch("/api/traffic-light-settings", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newCycle),
+        });
+
+        const createdCycle = await response.json();
+        const newId = createdCycle.id; // 获取后端生成的 ID
+
+        trafficLightSettings[newId] = createdCycle;
         document.getElementById("new-cycle-name").value = "";
         updateSettingsOptions();
     });
