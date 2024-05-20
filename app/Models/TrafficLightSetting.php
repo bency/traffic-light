@@ -20,6 +20,7 @@ class TrafficLightSetting extends Model
         'start_time',
         'end_time',
         'heading',
+        'traffic_light_location_id',
     ];
 
     public function trafficLightLocation()

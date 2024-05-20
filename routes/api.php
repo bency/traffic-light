@@ -21,3 +21,4 @@ Route::apiResource('traffic-light-settings', TrafficLightSettingController::clas
 Route::get('/traffic-light-settings', [TrafficLightSettingApiController::class, 'index']);
 Route::get('/counties', [TrafficLightSettingApiController::class, 'getCounties']);
 Route::get('/districts', [TrafficLightSettingApiController::class, 'getDistricts']);
+Route::get('/roads', [TrafficLightSettingApiController::class, 'getRoads']);
