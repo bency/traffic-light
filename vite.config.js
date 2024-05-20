@@ -9,6 +9,7 @@ export default defineConfig({
                 "resources/js/traffic-light.js",
                 "resources/css/app.css",
                 "resources/js/traffic-light-settings.js",
+                "node_modules/bootstrap/dist/css/bootstrap.min.css",
             ],
             refresh: true,
         }),

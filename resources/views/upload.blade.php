@@ -5,20 +5,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload CSV File</title>
+    @vite(['resources/css/app.css'])
 </head>
 
 <body>
-    <h1>Upload CSV File</h1>
+    <div class="container">
+        <h1 class="my-4">Upload CSV File</h1>
 
-    @if (session('success'))
-    <p>{{ session('success') }}</p>
-    @endif
+        @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
 
-    <form action="{{ route('traffic-light-locations.upload') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <input type="file" name="file" required>
-        <button type="submit">Upload</button>
-    </form>
+        <form action="{{ route('traffic-light-locations.upload') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="mb-3">
+                <input type="file" name="file" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+    </div>
 </body>
 
 </html>

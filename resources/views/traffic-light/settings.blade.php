@@ -10,20 +10,26 @@
 
 <body>
     <div class="container">
-        <h1>Traffic Light Settings</h1>
+        <h1 class="my-4">Traffic Light Settings</h1>
 
-        <div class="filters">
-            <label for="county">County:</label>
-            <input type="text" id="county" name="county">
+        <div class="filters mb-4">
+            <div class="mb-3">
+                <label for="county" class="form-label">County:</label>
+                <input type="text" id="county" name="county" class="form-control">
+            </div>
 
-            <label for="district">District:</label>
-            <input type="text" id="district" name="district">
+            <div class="mb-3">
+                <label for="district" class="form-label">District:</label>
+                <input type="text" id="district" name="district" class="form-control">
+            </div>
 
-            <label for="road">Road:</label>
-            <input type="text" id="road" name="road">
+            <div class="mb-3">
+                <label for="road" class="form-label">Road:</label>
+                <input type="text" id="road" name="road" class="form-control">
+            </div>
         </div>
 
-        <table>
+        <table class="table table-striped">
             <thead>
                 <tr>
                     <th>County</th>
