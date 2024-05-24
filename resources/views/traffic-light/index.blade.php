@@ -64,10 +64,10 @@
                             <div class="draggable p-3 border" id="adjust-red">
                                 紅燈: <span id="red-time">30</span> 秒
                                 <div class="adjust-buttons mt-2">
-                                    <button class="btn btn-sm btn-outline-danger me-1">-5</button>
-                                    <button class="btn btn-sm btn-outline-danger me-1">-1</button>
-                                    <button class="btn btn-sm btn-outline-danger me-1">+1</button>
-                                    <button class="btn btn-sm btn-outline-danger">+5</button>
+                                    <button class="btn decrease-time-5 btn-sm btn-outline-danger me-1">-5</button>
+                                    <button class="btn decrease-time  btn-sm btn-outline-danger me-1">-1</button>
+                                    <button class="btn increase-time  btn-sm btn-outline-danger me-1">+1</button>
+                                    <button class="btn increase-time-5 btn-sm btn-outline-danger">+5</button>
                                 </div>
                             </div>
                         </div>
@@ -75,10 +75,10 @@
                             <div class="draggable p-3 border" id="adjust-green">
                                 綠燈: <span id="green-time">25</span> 秒
                                 <div class="adjust-buttons mt-2">
-                                    <button class="btn btn-sm btn-outline-success me-1">-5</button>
-                                    <button class="btn btn-sm btn-outline-success me-1">-1</button>
-                                    <button class="btn btn-sm btn-outline-success me-1">+1</button>
-                                    <button class="btn btn-sm btn-outline-success">+5</button>
+                                    <button class="btn decrease-time-5 btn-sm btn-outline-success me-1">-5</button>
+                                    <button class="btn decrease-time   btn-sm btn-outline-success me-1">-1</button>
+                                    <button class="btn increase-time   btn-sm btn-outline-success me-1">+1</button>
+                                    <button class="btn increase-time-5 btn-sm btn-outline-success">+5</button>
                                 </div>
                             </div>
                         </div>
@@ -86,10 +86,10 @@
                             <div class="draggable p-3 border" id="adjust-left-green">
                                 左轉: <span id="left-green-time">0</span> 秒
                                 <div class="adjust-buttons mt-2">
-                                    <button class="btn btn-sm btn-outline-primary me-1">-5</button>
-                                    <button class="btn btn-sm btn-outline-primary me-1">-1</button>
-                                    <button class="btn btn-sm btn-outline-primary me-1">+1</button>
-                                    <button class="btn btn-sm btn-outline-primary">+5</button>
+                                    <button class="btn decrease-time-5 btn-sm btn-outline-primary me-1">-5</button>
+                                    <button class="btn decrease-time   btn-sm btn-outline-primary me-1">-1</button>
+                                    <button class="btn increase-time   btn-sm btn-outline-primary me-1">+1</button>
+                                    <button class="btn increase-time-5 btn-sm btn-outline-primary">+5</button>
                                 </div>
                             </div>
                         </div>
@@ -97,10 +97,10 @@
                             <div class="draggable p-3 border" id="adjust-straight-green">
                                 直行: <span id="straight-green-time">0</span> 秒
                                 <div class="adjust-buttons mt-2">
-                                    <button class="btn btn-sm btn-outline-info me-1">-5</button>
-                                    <button class="btn btn-sm btn-outline-info me-1">-1</button>
-                                    <button class="btn btn-sm btn-outline-info me-1">+1</button>
-                                    <button class="btn btn-sm btn-outline-info">+5</button>
+                                    <button class="btn decrease-time-5 btn-sm btn-outline-info me-1">-5</button>
+                                    <button class="btn decrease-time   btn-sm btn-outline-info me-1">-1</button>
+                                    <button class="btn increase-time   btn-sm btn-outline-info me-1">+1</button>
+                                    <button class="btn increase-time-5 btn-sm btn-outline-info">+5</button>
                                 </div>
                             </div>
                         </div>
@@ -108,10 +108,10 @@
                             <div class="draggable p-3 border" id="adjust-right-green">
                                 右轉: <span id="right-green-time">0</span> 秒
                                 <div class="adjust-buttons mt-2">
-                                    <button class="btn btn-sm btn-outline-secondary me-1">-5</button>
-                                    <button class="btn btn-sm btn-outline-secondary me-1">-1</button>
-                                    <button class="btn btn-sm btn-outline-secondary me-1">+1</button>
-                                    <button class="btn btn-sm btn-outline-secondary">+5</button>
+                                    <button class="btn decrease-time-5 btn-sm btn-outline-secondary me-1">-5</button>
+                                    <button class="btn decrease-time   btn-sm btn-outline-secondary me-1">-1</button>
+                                    <button class="btn increase-time   btn-sm btn-outline-secondary me-1">+1</button>
+                                    <button class="btn increase-time-5 btn-sm btn-outline-secondary">+5</button>
                                 </div>
                             </div>
                         </div>
@@ -119,10 +119,10 @@
                             <div class="draggable p-3 border" id="adjust-yellow">
                                 黃燈: <span id="yellow-time">5</span> 秒
                                 <div class="adjust-buttons mt-2">
-                                    <button class="btn btn-sm btn-outline-warning me-1">-5</button>
-                                    <button class="btn btn-sm btn-outline-warning me-1">-1</button>
-                                    <button class="btn btn-sm btn-outline-warning me-1">+1</button>
-                                    <button class="btn btn-sm btn-outline-warning">+5</button>
+                                    <button class="btn decrease-time-5 btn-sm btn-outline-warning me-1">-5</button>
+                                    <button class="btn decrease-time   btn-sm btn-outline-warning me-1">-1</button>
+                                    <button class="btn increase-time   btn-sm btn-outline-warning me-1">+1</button>
+                                    <button class="btn increase-time-5 btn-sm btn-outline-warning">+5</button>
                                 </div>
                             </div>
                         </div>
