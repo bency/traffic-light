@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    @include('layouts.navbar')
     <div class="container">
         <h1 class="my-4">Create Traffic Light</h1>
 

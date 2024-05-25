@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    @include('layouts.navbar')
     <div class="container mt-5">
         <div class="row mb-3">
             <div class="col-md-12">

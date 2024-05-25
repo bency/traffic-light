@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    @include('layouts.navbar')
     <div class="container">
         <h1 class="my-4">Edit Traffic Light</h1>
         <div id="traffic-light-preview">
