@@ -22,10 +22,12 @@ jobs:
         run: |
           rsync -avz --delete --no-times --exclude='.git' -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" ./ bency@mario.bency.org:/var/www/traffic.keeping.work
 
-      - name: Install dependencies
+      - name: Install dependencies and build assets
         run: |
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no bency@mario.bency.org << 'EOF'
           cd /var/www/traffic.keeping.work
           composer install --no-dev
+          npm install
+          npm run production
           php artisan migrate --force
           EOF
