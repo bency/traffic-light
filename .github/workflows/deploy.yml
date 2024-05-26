@@ -3,33 +3,29 @@ name: Deploy to Server
 on:
   push:
     branches:
-      - master  # 或者您想要觸發部署的其他分支
+      - master # 或者您想要觸發部署的其他分支
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-      with:
-        ssh-key: ${{ secrets.DEPLOY_KEY }}
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up SSH
-      run: |
-        mkdir -p ~/.ssh
-        echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan mario.bency.org >> ~/.ssh/known_hosts
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-    - name: Sync files
-      run: |
-        rsync -avz --delete --exclude='.git' -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" ./ bency@mario.bency.org:/var/www/traffic.keeping.work
+      - name: Sync files
+        run: |
+          rsync -avz --delete --exclude='.git' -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" ./ bency@mario.bency.org:/var/www/traffic.keeping.work
 
-    - name: Install dependencies
-      run: |
-        ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no bency@mario.bency.org << 'EOF'
-        cd /var/www/traffic.keeping.work
-        composer install --no-dev
-        php artisan migrate --force
-        EOF
+      - name: Install dependencies
+        run: |
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no bency@mario.bency.org << 'EOF'
+          cd /var/www/traffic.keeping.work
+          composer install --no-dev
+          php artisan migrate --force
+          EOF
