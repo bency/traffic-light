@@ -18,17 +18,25 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Sync files
+      - name: Sync files to temporary directory
         run: |
-          rsync -avz --delete --no-perms --chown=www-data:www-data --no-times --exclude='.git' --exclude='.env' -e "ssh -o StrictHostKeyChecking=no" ./ bency@mario.bency.org:/var/www/traffic.keeping.work
+          mkdir -p ~/.ssh
+          ssh-keyscan mario.bency.org >> ~/.ssh/known_hosts
+          rsync -avz --delete --no-times --no-perms --exclude='.git' --exclude='.env' -e "ssh -o StrictHostKeyChecking=no" ./ bency@mario.bency.org:/tmp/traffic.keeping.work
+
+      - name: Move files to target directory and set permissions
+        run: |
+          ssh -o StrictHostKeyChecking=no bency@mario.bency.org << 'EOF'
+          sudo rsync -avz --delete --no-times --no-perms  --exclude='.env' /tmp/traffic.keeping.work/ /var/www/traffic.keeping.work
+          sudo chown -R www-data:www-data /var/www/traffic.keeping.work
+          EOF
 
       - name: Install dependencies and build assets
         run: |
-          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no bency@mario.bency.org << 'EOF'
+          ssh -o StrictHostKeyChecking=no bency@mario.bency.org << 'EOF'
           cd /var/www/traffic.keeping.work
           composer install --no-dev
           npm install
           npm run build
           php artisan migrate --force
-          sudo chown -R www-data:www-data /var/www/traffic.keeping.work
           EOF
