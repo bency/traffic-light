@@ -20,7 +20,7 @@ jobs:
 
       - name: Sync files
         run: |
-          rsync -avz --delete --no-times --exclude='.git' -e "ssh -o StrictHostKeyChecking=no" ./ bency@mario.bency.org:/var/www/traffic.keeping.work
+          rsync -avz --delete --no-perms --no-times --exclude='.git' -e "ssh -o StrictHostKeyChecking=no" ./ bency@mario.bency.org:/var/www/traffic.keeping.work
 
       - name: Install dependencies and build assets
         run: |
