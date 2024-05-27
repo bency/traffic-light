@@ -38,5 +38,4 @@ jobs:
           composer install --no-dev
           npm install
           npm run build
-          npm run production
           EOF
