@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Traffic Light Countdown</title>
     @vite(['resources/css/traffic-light.css', 'resources/js/traffic-light.js', 'resources/css/app.css'])
-    <link rel="stylesheet" href="{{ mix('node_modules/@fortawesome/fontawesome-free/css/all.min.css') }}">
 </head>
 
 <body>
