@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Traffic Light Settings</title>
+    <link rel="icon" href="/path/to/favicon.ico" type="image/x-icon">
     @vite(['resources/css/app.css', 'resources/js/traffic-light-settings.js'])
 </head>
 
