@@ -22,7 +22,7 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           ssh-keyscan mario.bency.org >> ~/.ssh/known_hosts
-          rsync -avz --delete --no-times --no-perms --exclude='.git' --exclude='.env' -e "ssh -o StrictHostKeyChecking=no" ./ bency@mario.bency.org:/tmp/traffic.keeping.work
+          rsync -avz --delete --no-times --no-perms --exclude='.git' --exclude='.env' --exclude='tw_zipcode.json' -e "ssh -o StrictHostKeyChecking=no" ./ bency@mario.bency.org:/tmp/traffic.keeping.work
 
       - name: Move files to target directory and set permissions
         run: |
