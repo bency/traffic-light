@@ -154,6 +154,19 @@ class TrafficLightManager {
     updateTrafficLight() {
         document.querySelectorAll(".light").forEach((light) => {
             light.classList.remove("active");
+            light.style.display = "none";
+        });
+
+        this.lightSequence.forEach((light) => {
+            const lightElement = document.getElementById(`${light}-light`);
+            const lightSeconds =
+                this.trafficLightSettings[this.currentSettingId][
+                    `${light.replace("-", "_")}_seconds`
+                ];
+
+            if (lightSeconds > 0) {
+                lightElement.style.display = "inline-block";
+            }
         });
 
         document
