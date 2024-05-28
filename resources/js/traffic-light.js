@@ -153,34 +153,12 @@ class TrafficLightManager {
 
     updateTrafficLight() {
         document.querySelectorAll(".light").forEach((light) => {
-            light.style.opacity = 0.3;
-            light.style.display = "none";
+            light.classList.remove("active");
         });
 
-        document.getElementById(`${this.currentLight}-light`).style.opacity = 1;
-        document.getElementById(`${this.currentLight}-light`).style.display =
-            "inline-block";
-
-        // if (this.currentLight === "red") {
-        //     if (
-        //         this.showLeftGreenWithRed &&
-        //         this.trafficLightSettings[this.currentSettingId]
-        //             .left_green_seconds > 0
-        //     ) {
-        //         document.getElementById("left-green-light").style.display =
-        //             "inline-block";
-        //         document.getElementById("left-green-light").style.opacity = 1;
-        //     }
-        //     if (
-        //         this.showRightGreenWithRed &&
-        //         this.trafficLightSettings[this.currentSettingId]
-        //             .right_green_seconds > 0
-        //     ) {
-        //         document.getElementById("right-green-light").style.display =
-        //             "inline-block";
-        //         document.getElementById("right-green-light").style.opacity = 1;
-        //     }
-        // }
+        document
+            .getElementById(`${this.currentLight}-light`)
+            .classList.add("active");
     }
 
     updateCountdown() {

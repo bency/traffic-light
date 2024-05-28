@@ -1,4 +1,3 @@
-/* 添加适当的 CSS 样式 */
 .container {
     display: flex;
     flex-direction: column;
@@ -21,7 +20,7 @@
 }
 
 #traffic-light {
-    display: flex;
+    display: flex; /* 修改這裡使燈號橫向排列 */
     justify-content: center;
     margin-bottom: 10px;
 }
@@ -31,43 +30,47 @@
     height: 50px;
     margin: 5px;
     border-radius: 50%;
-    background-color: grey;
+    border: 2px solid black; /* 外框 */
+    position: relative;
+    background-color: #ddd; /* 默認顏色 */
 }
 
-#red-light {
+.light.active {
+    border-color: black;
+}
+
+#red-light.active {
     background-color: red;
 }
 
-#yellow-light {
+#yellow-light.active {
     background-color: yellow;
 }
 
-#green-light {
+#green-light.active {
     background-color: green;
 }
 
-#left-green-light {
-    background-color: #f0f0f0;
-    position: relative;
+#left-green-light.active i {
+    color: green;
 }
 
-#straight-green-light {
-    background-color: #f0f0f0;
-    position: relative;
+#straight-green-light.active i {
+    color: green;
 }
 
-#right-green-light {
-    background-color: #f0f0f0;
-    position: relative;
+#right-green-light.active i {
+    color: green;
 }
 
-.light span {
-    font-size: 20px;
-    color: white;
+.light i {
+    font-size: 24px;
+    color: #ddd;
     position: absolute;
     transform: translate(-50%, -50%);
     left: 50%;
     top: 50%;
+    font-size: 48px;
 }
 
 #countdown {
@@ -146,6 +149,7 @@
     justify-content: space-between;
     align-items: center;
 }
+
 .setting-option.active {
     background-color: #007bff;
     color: white;
@@ -159,15 +163,6 @@
     cursor: pointer;
     padding: 5px;
 }
-
-.setting-option .delete-button {
-    background-color: red;
-    color: white;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
-}
-
 
 /* 美化输入框和按钮 */
 #new-cycle-name {

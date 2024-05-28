@@ -20,17 +20,17 @@
         <div class="row mb-3">
             <div class="col-md-12 text-center">
                 <div id="traffic-light-container">
-                    <div id="traffic-light" class="d-inline-block">
-                        <div class="light red" id="red-light"></div>
-                        <div class="light yellow" id="yellow-light"></div>
-                        <div class="light green" id="green-light"></div>
-                        <div class="light left-green" id="left-green-light">
+                    <div id="traffic-light">
+                        <div class="light" id="red-light"></div>
+                        <div class="light" id="yellow-light"></div>
+                        <div class="light" id="green-light"></div>
+                        <div class="light" id="left-green-light">
                             <i class="fas fa-arrow-left"></i>
                         </div>
-                        <div class="light straight-green" id="straight-green-light">
+                        <div class="light" id="straight-green-light">
                             <i class="fas fa-arrow-up"></i>
                         </div>
-                        <div class="light right-green" id="right-green-light">
+                        <div class="light" id="right-green-light">
                             <i class="fas fa-arrow-right"></i>
                         </div>
                     </div>
@@ -66,8 +66,8 @@
                                 紅燈: <span id="red-time">30</span> 秒
                                 <div class="adjust-buttons mt-2">
                                     <button class="btn decrease-time-5 btn-sm btn-outline-danger me-1">-5</button>
-                                    <button class="btn decrease-time  btn-sm btn-outline-danger me-1">-1</button>
-                                    <button class="btn increase-time  btn-sm btn-outline-danger me-1">+1</button>
+                                    <button class="btn decrease-time btn-sm btn-outline-danger me-1">-1</button>
+                                    <button class="btn increase-time btn-sm btn-outline-danger me-1">+1</button>
                                     <button class="btn increase-time-5 btn-sm btn-outline-danger">+5</button>
                                 </div>
                             </div>
@@ -77,8 +77,8 @@
                                 綠燈: <span id="green-time">25</span> 秒
                                 <div class="adjust-buttons mt-2">
                                     <button class="btn decrease-time-5 btn-sm btn-outline-success me-1">-5</button>
-                                    <button class="btn decrease-time   btn-sm btn-outline-success me-1">-1</button>
-                                    <button class="btn increase-time   btn-sm btn-outline-success me-1">+1</button>
+                                    <button class="btn decrease-time btn-sm btn-outline-success me-1">-1</button>
+                                    <button class="btn increase-time btn-sm btn-outline-success me-1">+1</button>
                                     <button class="btn increase-time-5 btn-sm btn-outline-success">+5</button>
                                 </div>
                             </div>
@@ -88,8 +88,8 @@
                                 左轉: <span id="left-green-time">0</span> 秒
                                 <div class="adjust-buttons mt-2">
                                     <button class="btn decrease-time-5 btn-sm btn-outline-primary me-1">-5</button>
-                                    <button class="btn decrease-time   btn-sm btn-outline-primary me-1">-1</button>
-                                    <button class="btn increase-time   btn-sm btn-outline-primary me-1">+1</button>
+                                    <button class="btn decrease-time btn-sm btn-outline-primary me-1">-1</button>
+                                    <button class="btn increase-time btn-sm btn-outline-primary me-1">+1</button>
                                     <button class="btn increase-time-5 btn-sm btn-outline-primary">+5</button>
                                 </div>
                             </div>
@@ -99,8 +99,8 @@
                                 直行: <span id="straight-green-time">0</span> 秒
                                 <div class="adjust-buttons mt-2">
                                     <button class="btn decrease-time-5 btn-sm btn-outline-info me-1">-5</button>
-                                    <button class="btn decrease-time   btn-sm btn-outline-info me-1">-1</button>
-                                    <button class="btn increase-time   btn-sm btn-outline-info me-1">+1</button>
+                                    <button class="btn decrease-time btn-sm btn-outline-info me-1">-1</button>
+                                    <button class="btn increase-time btn-sm btn-outline-info me-1">+1</button>
                                     <button class="btn increase-time-5 btn-sm btn-outline-info">+5</button>
                                 </div>
                             </div>
@@ -110,8 +110,8 @@
                                 右轉: <span id="right-green-time">0</span> 秒
                                 <div class="adjust-buttons mt-2">
                                     <button class="btn decrease-time-5 btn-sm btn-outline-secondary me-1">-5</button>
-                                    <button class="btn decrease-time   btn-sm btn-outline-secondary me-1">-1</button>
-                                    <button class="btn increase-time   btn-sm btn-outline-secondary me-1">+1</button>
+                                    <button class="btn decrease-time btn-sm btn-outline-secondary me-1">-1</button>
+                                    <button class="btn increase-time btn-sm btn-outline-secondary me-1">+1</button>
                                     <button class="btn increase-time-5 btn-sm btn-outline-secondary">+5</button>
                                 </div>
                             </div>
@@ -121,8 +121,8 @@
                                 黃燈: <span id="yellow-time">5</span> 秒
                                 <div class="adjust-buttons mt-2">
                                     <button class="btn decrease-time-5 btn-sm btn-outline-warning me-1">-5</button>
-                                    <button class="btn decrease-time   btn-sm btn-outline-warning me-1">-1</button>
-                                    <button class="btn increase-time   btn-sm btn-outline-warning me-1">+1</button>
+                                    <button class="btn decrease-time btn-sm btn-outline-warning me-1">-1</button>
+                                    <button class="btn increase-time btn-sm btn-outline-warning me-1">+1</button>
                                     <button class="btn increase-time-5 btn-sm btn-outline-warning">+5</button>
                                 </div>
                             </div>
