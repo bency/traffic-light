@@ -48,6 +48,31 @@
                 <div class="time-adjust-container">
                     <div id="time-adjust" class="row">
                         <div class="mb-3">
+                            <div class="county-selection p-3 border">
+                                <label for="county" class="form-label">縣市:</label>
+                                <select id="county" class="form-select"></select>
+                            </div>
+                            <div class="district-selection p-3 border">
+                                <label for="district" class="form-label">區域:</label>
+                                <select id="district" class="form-select" disabled>
+                                    <option value="">選擇區域</option>
+                                </select>
+                            </div>
+                            <div class="heading-selection p-3 border">
+                                <label for="heading" class="form-label">方向:</label>
+                                <select id="heading" class="form-select">
+                                    <option value="N">往北</option>
+                                    <option value="NE">往東北</option>
+                                    <option value="E">往東</option>
+                                    <option value="SE">往東南</option>
+                                    <option value="S">往南</option>
+                                    <option value="SW">往西南</option>
+                                    <option value="W">往西</option>
+                                    <option value="NW">往西北</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
                             <div class="draggable p-3 border" id="adjust-red">
                                 偏移: <span id="offset-display">0</span> 秒
                                 <div class="adjust-buttons mt-2">
@@ -69,6 +94,17 @@
                                     <button class="btn decrease-time btn-sm btn-outline-danger me-1">-1</button>
                                     <button class="btn increase-time btn-sm btn-outline-danger me-1">+1</button>
                                     <button class="btn increase-time-5 btn-sm btn-outline-danger">+5</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="draggable p-3 border" id="adjust-yellow">
+                                黃燈: <span id="yellow-time">5</span> 秒
+                                <div class="adjust-buttons mt-2">
+                                    <button class="btn decrease-time-5 btn-sm btn-outline-warning me-1">-5</button>
+                                    <button class="btn decrease-time btn-sm btn-outline-warning me-1">-1</button>
+                                    <button class="btn increase-time btn-sm btn-outline-warning me-1">+1</button>
+                                    <button class="btn increase-time-5 btn-sm btn-outline-warning">+5</button>
                                 </div>
                             </div>
                         </div>
@@ -117,37 +153,11 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <div class="draggable p-3 border" id="adjust-yellow">
-                                黃燈: <span id="yellow-time">5</span> 秒
-                                <div class="adjust-buttons mt-2">
-                                    <button class="btn decrease-time-5 btn-sm btn-outline-warning me-1">-5</button>
-                                    <button class="btn decrease-time btn-sm btn-outline-warning me-1">-1</button>
-                                    <button class="btn increase-time btn-sm btn-outline-warning me-1">+1</button>
-                                    <button class="btn increase-time-5 btn-sm btn-outline-warning">+5</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mb-3">
                             <div class="time-range p-3 border">
                                 <label for="start-time" class="form-label">開始時間:</label>
                                 <input type="time" id="start-time" class="form-control">
                                 <label for="end-time" class="form-label mt-2">結束時間:</label>
                                 <input type="time" id="end-time" class="form-control">
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="heading-selection p-3 border">
-                                <label for="heading" class="form-label">方向:</label>
-                                <select id="heading" class="form-select">
-                                    <option value="N">往北</option>
-                                    <option value="NE">往東北</option>
-                                    <option value="E">往東</option>
-                                    <option value="SE">往東南</option>
-                                    <option value="S">往南</option>
-                                    <option value="SW">往西南</option>
-                                    <option value="W">往西</option>
-                                    <option value="NW">往西北</option>
-                                </select>
                             </div>
                         </div>
                     </div>

@@ -16,6 +16,8 @@ class TrafficLightManager {
         this.currentLight = null;
         this.showLeftGreenWithRed = true;
         this.showRightGreenWithRed = true;
+        this.defaultCounty = "台南市";
+        this.defaultDistrict = "";
     }
 
     async fetchSettings() {
@@ -115,6 +117,12 @@ class TrafficLightManager {
     setHeading() {
         const setting = this.trafficLightSettings[this.currentSettingId];
         document.getElementById("heading").value = setting.heading || "";
+    }
+
+    setCountyAndDistrict() {
+        const setting = this.trafficLightSettings[this.currentSettingId];
+        this.defaultCounty = setting.traffic_light_location.county;
+        this.defaultDistrict = setting.traffic_light_location.district;
     }
 
     calculateRemainingSeconds() {
@@ -295,6 +303,8 @@ class TrafficLightManager {
             this.updateCurrentSettings();
             this.updateSettingsOptions();
             this.setHeading();
+            this.setCountyAndDistrict();
+            await this.fetchAndDisplayCounties();
         } else {
             console.error(`Setting ID ${id} is invalid.`);
         }
@@ -363,6 +373,49 @@ class TrafficLightManager {
         this.currentSettingId = newId;
         this.updateSettingsOptions();
         return newId;
+    }
+
+    async fetchAndDisplayCounties() {
+        const countyInput = document.getElementById("county");
+        const response = await fetch("/api/counties");
+        const counties = await response.json();
+
+        countyInput.innerHTML = "";
+
+        counties.forEach((county) => {
+            const option = document.createElement("option");
+            option.value = county;
+            option.textContent = county;
+            countyInput.appendChild(option);
+        });
+
+        // 設置選中的縣市
+        countyInput.value = this.defaultCounty;
+        await this.fetchAndDisplayDistricts();
+    }
+
+    async fetchAndDisplayDistricts() {
+        const countyInput = document.getElementById("county");
+        const districtInput = document.getElementById("district");
+        const county = countyInput.value;
+        districtInput.innerHTML = '<option value="">Select District</option>';
+
+        if (county) {
+            const response = await fetch(`/api/districts?county=${county}`);
+            const districts = await response.json();
+
+            districts.forEach((district) => {
+                const option = document.createElement("option");
+                option.value = district;
+                option.textContent = district;
+                districtInput.appendChild(option);
+            });
+
+            districtInput.disabled = false;
+            districtInput.value = this.defaultDistrict; // 設置選中的區域
+        } else {
+            districtInput.disabled = true;
+        }
     }
 
     attachEventListeners() {
@@ -525,6 +578,10 @@ class TrafficLightManager {
                 container.insertBefore(draggable, afterElement);
             }
         });
+
+        document
+            .getElementById("county")
+            .addEventListener("change", () => this.fetchAndDisplayDistricts());
     }
 
     getDragAfterElement(container, y) {
@@ -617,6 +674,8 @@ class TrafficLightManager {
 
         this.setInputTimes();
         this.setHeading();
+        this.setCountyAndDistrict();
+        await this.fetchAndDisplayCounties();
         this.calculateRemainingSeconds();
         this.updateTrafficLight();
         this.updateCountdown();
