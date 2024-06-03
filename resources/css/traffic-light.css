@@ -135,7 +135,6 @@
 #settings-options {
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
 .setting-option {
