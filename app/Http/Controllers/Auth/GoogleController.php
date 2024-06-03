@@ -8,6 +8,7 @@ use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash; // 引入 Hash
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class GoogleController extends Controller
@@ -35,9 +36,10 @@ class GoogleController extends Controller
 
             Auth::login($user);
 
-            return redirect('/home');
+            return redirect()->route('dashboard');
         } catch (\Exception $e) {
-            return redirect('/login');
+            Log::error($e->getMessage());
+            return redirect('/login')->with('error', 'Google 登入失敗');
         }
     }
 }
