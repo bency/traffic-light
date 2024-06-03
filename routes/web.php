@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TrafficLightSettingController;
 use App\Http\Controllers\TrafficLightLocationController;
+use App\Http\Controllers\Auth\GoogleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,9 @@ Route::view('/traffic-light/edit', 'traffic-light.edit');
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('auth.google');
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
