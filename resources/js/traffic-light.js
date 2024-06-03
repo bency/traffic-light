@@ -45,6 +45,14 @@ class TrafficLightManager {
 
     saveCurrentSettingId(id) {
         localStorage.setItem("currentSettingId", id);
+        const url = new URL(window.location);
+        url.searchParams.set("id", id);
+        window.history.pushState({}, "", url);
+    }
+
+    getCurrentSettingIdFromUrl() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get("id");
     }
 
     determineCurrentSetting(settings) {
@@ -534,20 +542,6 @@ class TrafficLightManager {
                 this.updateSettingsOptions();
             });
 
-        // document
-        //     .getElementById("show-left-arrow")
-        //     .addEventListener("change", (e) => {
-        //         this.showLeftGreenWithRed = e.target.checked;
-        //         this.updateTrafficLight();
-        //     });
-
-        // document
-        //     .getElementById("show-right-arrow")
-        //     .addEventListener("change", (e) => {
-        //         this.showRightGreenWithRed = e.target.checked;
-        //         this.updateTrafficLight();
-        //     });
-
         const draggables = document.querySelectorAll(".draggable");
         const container = document.getElementById("time-adjust");
 
@@ -655,7 +649,9 @@ class TrafficLightManager {
 
     async initialize() {
         await this.fetchSettings();
-        this.currentSettingId = localStorage.getItem("currentSettingId");
+        this.currentSettingId =
+            this.getCurrentSettingIdFromUrl() ||
+            localStorage.getItem("currentSettingId");
 
         if (
             !this.currentSettingId ||
