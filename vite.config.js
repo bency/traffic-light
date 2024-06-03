@@ -10,8 +10,9 @@ export default defineConfig({
         laravel({
             input: [
                 "resources/css/traffic-light.css",
-                "resources/js/traffic-light.js",
                 "resources/css/app.css",
+                "resources/js/traffic-light.js",
+                "resources/js/app.js",
                 "resources/js/traffic-light-settings.js",
                 "resources/js/traffic-light-create.js",
                 "resources/js/traffic-light-edit.js",
