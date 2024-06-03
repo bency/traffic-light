@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash; // 引入 Hash
+use Illuminate\Support\Str;
 
 class GoogleController extends Controller
 {
@@ -27,6 +29,7 @@ class GoogleController extends Controller
                     'name' => $googleUser->getName(),
                     'google_id' => $googleUser->getId(),
                     'avatar' => $googleUser->getAvatar(),
+                    'password' => Hash::make(Str::random(24)), // 生成隨機密碼並哈希
                 ]
             );
 
