@@ -5,14 +5,23 @@ import path from "path";
 
 export default defineConfig({
     server: {
-        https: {
-            key: fs.readFileSync(
-                path.resolve(__dirname, "certs/traffic.keeping.work.key")
-            ),
-            cert: fs.readFileSync(
-                path.resolve(__dirname, "certs/traffic.keeping.work.crt")
-            ),
-        },
+        https:
+            process.env.NODE_ENV === "development"
+                ? {
+                      key: fs.readFileSync(
+                          path.resolve(
+                              __dirname,
+                              "certs/traffic.keeping.work.key"
+                          )
+                      ),
+                      cert: fs.readFileSync(
+                          path.resolve(
+                              __dirname,
+                              "certs/traffic.keeping.work.crt"
+                          )
+                      ),
+                  }
+                : null,
         host: "localhost.keeping.work",
         port: 5173,
         public: "https://localhost.keeping.work:5173",
